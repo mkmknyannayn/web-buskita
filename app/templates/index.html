@@ -1,0 +1,46 @@
+<html>
+    <head>
+        <title>{{title}}</title>
+        <link rel="shortcut icon" href="/static/favicon.ico">
+        <link rel="stylesheet" href="/static/css/sample.css">
+    </head>
+    <body style="background-color:#85929E;">
+        <!-- <br> -->
+        <!-- </br> -->
+        <header style="background-color:#2E4053;">
+            <span style="text-align:center">
+                 <img src="/static/images/header.png" widht="100px" height="100px">
+                 <h1 style="text-align:center;color:#F0F3F4;">バス接近情報</h1>
+            </span>
+        </header>
+        <h2>
+        {% for route in routes %}
+            <br></br>
+            <h2 style="background-color:#2874A6;">
+                <img src="/static/images/college.png" widht="40px" height="40px">
+                {{ route }}
+            </h2>
+                <h1>
+                    {% for incoming in routes[route] %}
+                    <img src={{ incoming["icon_number"] }} align="left" widht="35px" height="35px">
+                    <h2 style="background-color:#5D6D7E;">{{ incoming['time'] }} {{ incoming['str_type'] }}</h2>
+
+                    <h2 style="background-color:#D4AC0D;text-indent:3rem;">
+                        {% if incoming['delay'] != 0 %}
+                            <img src="/static/images/warning.png" widht="30px" height="30px">
+                        {% elif incoming['destination'] == "まもなくバスがまいります" %}
+                            <img src="/static/images/notification.png" widht="30px" height="30px">
+                        {% elif incoming['destination'] == "運行終了" %}
+                            <img src="/static/images/cancel.png" widht="30px" height="30px">
+                        {% else %}
+                            <img src="/static/images/success.png" widht="30px" height="30px">
+                        {% endif %}
+
+                    {{ incoming['destination'] }}
+                    </h2>
+                </h1>
+                {% endfor %} 
+        </h2>
+        {% endfor %}
+    </body>
+</html>
