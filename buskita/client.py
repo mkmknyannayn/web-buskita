@@ -1,6 +1,6 @@
 from buskita.api import BuskitaApi
 import datetime
-
+import asyncio
 
 
 
@@ -14,7 +14,7 @@ japan_timezone = datetime.timezone(
 buskita_api = BuskitaApi()
 
 
-def get_incomings(departure_busstop: int=681, arrival_busstop: int=391) -> list:
+async def get_incomings(departure_busstop: int=681, arrival_busstop: int=391) -> list:
 	incomings = []
 
 	now_time	= datetime.datetime.now(japan_timezone)

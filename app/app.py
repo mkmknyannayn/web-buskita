@@ -1,13 +1,37 @@
 #coding: utf-8
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, send_from_directory, request
+import os
 from buskita import client
 import datetime
+import asyncio
 
 
 
 app = Flask(__name__)
 
+routes = {
+    '工大発 工大線': {
+        'route_image': '/static/images/college.png',
+        'route_color': "background-color:#2874A6;color:#EAECEE;justify-content:center;",
+        'incomings': []
+    },
+    '工大発 ろう学校線': {
+        'route_image': '/static/images/bus.png',
+        'route_color': "background-color:#4A235A;color:#EAECEE;justify-content:center;",
+        'incomings': []
+    },
+    '東通り発 工大線': {
+        'route_image': '/static/images/college.png',
+        'route_color': "background-color:#2874A6;color:#EAECEE;justify-content:center;",
+        'incomings': []
+    },
+    '中島三丁目発 ろう学校線': {
+        'route_image': '/static/images/bus.png',
+        'route_color': "background-color:#4A235A;color:#EAECEE;justify-content:center;",
+        'incomings': []
+    }
+}
 
 icon_numbers = [
     '/static/images/number-1.png',
@@ -18,6 +42,7 @@ icon_numbers = [
 ]
 
 
+
 @app.route('/favicon.ico')
 def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static/'), 'favicon.ico', )
@@ -25,49 +50,26 @@ def favicon():
 
 @app.route("/")
 @app.route("/index")
-def _index():
-    routes = {
-        '工大発 工大線': {
-            'route_image': '/static/images/college.png',
-            'route_color': "background-color:#2874A6;color:#EAECEE;justify-content:center;",
-            'incomings': []
-        },
-        '工大発 ろう学校線': {
-            'route_image': '/static/images/bus.png',
-            'route_color': "background-color:#4A235A;color:#EAECEE;justify-content:center;",
-            'incomings': []
-        },
-        '東通り発 工大線': {
-            'route_image': '/static/images/college.png',
-            'route_color': "background-color:#2874A6;color:#EAECEE;justify-content:center;",
-            'incomings': []
-        },
-        '中島三丁目発 ろう学校線': {
-            'route_image': '/static/images/bus.png',
-            'route_color': "background-color:#4A235A;color:#EAECEE;justify-content:center;",
-            'incomings': []
-        }
-    }
-
-    incomings = client.get_incomings(departure_busstop=681, arrival_busstop=391)
+async def _index():
+    incomings = await client.get_incomings(departure_busstop=681, arrival_busstop=391)
     for icon_number, incoming in zip(icon_numbers, incomings):
         incoming['icon_number'] = icon_number
             
     routes['工大発 工大線']['incomings'] = incomings
 
-    incomings = client.get_incomings(departure_busstop=661, arrival_busstop=391)
+    incomings = await client.get_incomings(departure_busstop=661, arrival_busstop=391)
     for icon_number, incoming in zip(icon_numbers, incomings):
         incoming['icon_number'] = icon_number
             
     routes['工大発 ろう学校線']['incomings'] = incomings
 
-    incomings = client.get_incomings(departure_busstop=391, arrival_busstop=681)
+    incomings = await client.get_incomings(departure_busstop=391, arrival_busstop=681)
     for icon_number, incoming in zip(icon_numbers, incomings):
         incoming['icon_number'] = icon_number
             
     routes['東通り発 工大線']['incomings'] = incomings
 
-    incomings = client.get_incomings(departure_busstop=391, arrival_busstop=661)
+    incomings = await client.get_incomings(departure_busstop=391, arrival_busstop=661)
     for icon_number, incoming in zip(icon_numbers, incomings):
         incoming['icon_number'] = icon_number
             
