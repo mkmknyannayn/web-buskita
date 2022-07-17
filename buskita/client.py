@@ -19,8 +19,8 @@ def get_incomings(departure_busstop: int=681, arrival_busstop: int=391) -> list:
 
 	now_time	= datetime.datetime.now(japan_timezone)
 	search_results = buskita_api.search_routes(
-			# target_time=now_time.strftime('%Y/%m/%d %H:%M'),
-			target_time='2022/07/17 08:10',
+			target_time=now_time.strftime('%Y/%m/%d %H:%M'),
+			# target_time='2022/07/17 08:10',
 			departure_busstop=departure_busstop,
 			arrival_busstop=arrival_busstop
 	)
