@@ -43,6 +43,11 @@ routes = {
 }
 
 
+@app.before_request
+def before_request():
+    request.MOBILE = True
+
+
 @app.route('/favicon.ico')
 def favicon():
     return send_from_directory(os.path.join(app.root_path, '/static/'), 'favicon.ico', )
