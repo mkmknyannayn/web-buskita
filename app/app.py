@@ -14,28 +14,28 @@ app = Flask(__name__)
 routes = {
     '工大発 工大線': {
         'route_image': '/static/images/college.png',
-        'route_color': "background-color:#2874A6;color:#EAECEE;justify-content:center;",
+        'route_color': "background-color:#2874A6;color:#EAECEE;vertical-align:bottom;",
         'incomings': [],
         'departure_busstop': 681, 
         'arrival_busstop': 391
     },
     '工大発 ろう学校線': {
         'route_image': '/static/images/bus.png',
-        'route_color': "background-color:#4A235A;color:#EAECEE;justify-content:center;",
+        'route_color': "background-color:#4A235A;color:#EAECEE;vertical-align:bottom;",
         'incomings': [],
         'departure_busstop': 661, 
         'arrival_busstop': 391
     },
     '東通り発 工大線': {
         'route_image': '/static/images/college.png',
-        'route_color': "background-color:#2874A6;color:#EAECEE;justify-content:center;",
+        'route_color': "background-color:#2874A6;color:#EAECEE;vertical-align:bottom;",
         'incomings': [],
         'departure_busstop': 391, 
         'arrival_busstop': 681
     },
     '中島三丁目発 ろう学校線': {
         'route_image': '/static/images/bus.png',
-        'route_color': "background-color:#4A235A;color:#EAECEE;justify-content:center;",
+        'route_color': "background-color:#4A235A;color:#EAECEE;vertical-align:bottom;",
         'incomings': [],
         'departure_busstop': 391, 
         'arrival_busstop': 661
