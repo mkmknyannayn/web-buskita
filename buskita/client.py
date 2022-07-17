@@ -82,4 +82,5 @@ async def get_incomings(departure_busstop: int=681, arrival_busstop: int=391) ->
 				'destination': "運行終了"
 			}
 		)
+		
 	return incomings

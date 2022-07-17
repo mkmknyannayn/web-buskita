@@ -24,12 +24,10 @@
                     {% for incoming in routes[route]['incomings'] %}
                         {% if incoming['str_type'] != "本日の運行は終了しました。" %}
                             <div style="background-color:#E5E7E9;">
-                               <img src={{ incoming["icon_number"] }} widht="35px" height="35px">
                                <strong>{{ incoming['time'] }} {{ incoming['str_type'] }}</strong>
                             </div>
                         {% else %}
                             <div style="background-color:#707B7C;">
-                                <img src={{ incoming["icon_number"] }} widht="35px" height="35px">
                                 <strong>{{ incoming['time'] }} {{ incoming['str_type'] }}</strong>
                             </div>
                         {% endif %}
