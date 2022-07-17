@@ -61,7 +61,6 @@ def get_incomings(departure_busstop: int=681, arrival_busstop: int=391) -> list:
 		else:
 			delay = 0
 
-		print(delay)
 		incomings.append(
 			{
 				'int_type': int_type,
