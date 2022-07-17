@@ -4,40 +4,54 @@
         <link rel="shortcut icon" href="/static/favicon.ico">
         <link rel="stylesheet" href="/static/css/sample.css">
     </head>
-    <body style="background-color:#85929E;">
+    <body style="background-color:#2E4053;">
         <!-- <br> -->
         <!-- </br> -->
-        <header style="background-color:#2E4053;">
-            <span style="text-align:center">
-                 <img src="/static/images/header.png" widht="100px" height="100px">
+        <header style="background-color:#0E6655;">
+            <span>
+                 <img src="/static/images/header.png" widht="100px" height="100px" style="display:block;margin: auto;">
                  <h1 style="text-align:center;color:#F0F3F4;">バス接近情報</h1>
             </span>
         </header>
         <h2>
         {% for route in routes %}
             <br></br>
-            <h2 style="background-color:#2874A6;">
-                <img src="/static/images/college.png" widht="40px" height="40px">
+            <h2 style={{ routes[route]['route_color'] }}>
+                <img src={{ routes[route]['route_image'] }} widht="40px" height="40px">
                 {{ route }}
             </h2>
                 <h1>
-                    {% for incoming in routes[route] %}
+                    {% for incoming in routes[route]['incomings'] %}
                     <img src={{ incoming["icon_number"] }} align="left" widht="35px" height="35px">
-                    <h2 style="background-color:#5D6D7E;">{{ incoming['time'] }} {{ incoming['str_type'] }}</h2>
+                    {% if incoming['str_type'] != "本日の運行は終了しました。" %}
+                        <div style="background-color:#E5E7E9;">{{ incoming['time'] }} {{ incoming['str_type'] }}</div>
+                    {% else %}
+                        <div style="background-color:#707B7C;">{{ incoming['time'] }} {{ incoming['str_type'] }}</div>
+                    {% endif %}
 
-                    <h2 style="background-color:#D4AC0D;text-indent:3rem;">
-                        {% if incoming['delay'] != 0 %}
-                            <img src="/static/images/warning.png" widht="30px" height="30px">
-                        {% elif incoming['destination'] == "まもなくバスがまいります" %}
+                    {% if incoming['delay'] != 0 %}
+                        <div style="background-color:#B03A2E;text-indent:3rem;">
+                            <img src="/static/images/warning.png" widht="30px" height="30px"">
+                            {{ incoming['destination'] }}
+                        </div>
+                    {% elif incoming['destination'] == "まもなくバスがまいります" %}
+                        <div style="background-color:#D4AC0D;text-indent:3rem;">
                             <img src="/static/images/notification.png" widht="30px" height="30px">
-                        {% elif incoming['destination'] == "運行終了" %}
-                            <img src="/static/images/cancel.png" widht="30px" height="30px">
-                        {% else %}
-                            <img src="/static/images/success.png" widht="30px" height="30px">
-                        {% endif %}
+                            {{ incoming['destination'] }}
+                        </div>
 
-                    {{ incoming['destination'] }}
-                    </h2>
+                    {% elif incoming['destination'] == "運行終了" %}
+                        <div style="background-color:#212F3D;text-indent:3rem;color:#C0392B;">
+                            <img src="/static/images/cancel.png" widht="30px" height="30px">
+                            {{ incoming['destination'] }}
+                        </div>
+
+                    {% else %}
+                        <div style="background-color:#BDC3C7;text-indent:3rem;">
+                            <img src="/static/images/success.png" widht="30px" height="30px">
+                            {{ incoming['destination'] }}
+                        </div>
+                    {% endif %}            
                 </h1>
                 {% endfor %} 
         </h2>

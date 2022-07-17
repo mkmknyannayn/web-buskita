@@ -27,39 +27,56 @@ def favicon():
 @app.route("/index")
 def _index():
     routes = {
-        '工大発 工大線': [],
-        '工大発 ろう学校線': [],
-        '東通り発 工大線': [],
-        '中島三丁目発 ろう学校線': []
+        '工大発 工大線': {
+            'route_image': '/static/images/college.png',
+            'route_color': "background-color:#2874A6;color:#EAECEE;justify-content:center;",
+            'incomings': []
+        },
+        '工大発 ろう学校線': {
+            'route_image': '/static/images/bus.png',
+            'route_color': "background-color:#4A235A;color:#EAECEE;justify-content:center;",
+            'incomings': []
+        },
+        '東通り発 工大線': {
+            'route_image': '/static/images/college.png',
+            'route_color': "background-color:#2874A6;color:#EAECEE;justify-content:center;",
+            'incomings': []
+        },
+        '中島三丁目発 ろう学校線': {
+            'route_image': '/static/images/bus.png',
+            'route_color': "background-color:#4A235A;color:#EAECEE;justify-content:center;",
+            'incomings': []
+        }
     }
 
     incomings = client.get_incomings(departure_busstop=681, arrival_busstop=391)
     for icon_number, incoming in zip(icon_numbers, incomings):
         incoming['icon_number'] = icon_number
             
-    routes['工大発 工大線'] = incomings
+    routes['工大発 工大線']['incomings'] = incomings
 
     incomings = client.get_incomings(departure_busstop=661, arrival_busstop=391)
     for icon_number, incoming in zip(icon_numbers, incomings):
         incoming['icon_number'] = icon_number
             
-    routes['工大発 ろう学校線'] = incomings
+    routes['工大発 ろう学校線']['incomings'] = incomings
 
     incomings = client.get_incomings(departure_busstop=391, arrival_busstop=681)
     for icon_number, incoming in zip(icon_numbers, incomings):
         incoming['icon_number'] = icon_number
             
-    routes['東通り発 工大線'] = incomings
+    routes['東通り発 工大線']['incomings'] = incomings
 
     incomings = client.get_incomings(departure_busstop=391, arrival_busstop=661)
     for icon_number, incoming in zip(icon_numbers, incomings):
         incoming['icon_number'] = icon_number
             
-    routes['中島三丁目発 ろう学校線'] = incomings
+    routes['中島三丁目発 ろう学校線']['incomings'] = incomings
 
 
     return render_template(
         'index.html',
+        title="Muroran Bus Now!",
         routes=routes
     )
 
