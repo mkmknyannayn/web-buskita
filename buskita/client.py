@@ -20,7 +20,7 @@ def get_incomings(departure_busstop: int=681, arrival_busstop: int=391) -> list:
 	now_time	= datetime.datetime.now(japan_timezone)
 	search_results = buskita_api.search_routes(
 			target_time=now_time.strftime('%Y/%m/%d %H:%M'),
-			# target_time='2022/07/17 08:10',
+			# target_time='2022/07/17 09:10',
 			departure_busstop=departure_busstop,
 			arrival_busstop=arrival_busstop
 	)
@@ -50,7 +50,6 @@ def get_incomings(departure_busstop: int=681, arrival_busstop: int=391) -> list:
 		except IndexError:
 			destination = f"約{int_remaining_time}分で到着"
 		finally:
-			print(int_remaining_time)
 			if (int_remaining_time <= 1) and (not int_remaining_time < 0):
 				destination = f"まもなくバスがまいります"
 			else:

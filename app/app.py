@@ -27,21 +27,36 @@ def favicon():
 @app.route("/index")
 def _index():
     routes = {
-        '工大線': [],
-        'ろう学校線': []
+        '工大発 工大線': [],
+        '工大発 ろう学校線': [],
+        '東通り発 工大線': [],
+        '中島三丁目発 ろう学校線': []
     }
 
     incomings = client.get_incomings(departure_busstop=681, arrival_busstop=391)
     for icon_number, incoming in zip(icon_numbers, incomings):
         incoming['icon_number'] = icon_number
             
-    routes['工大線'] = incomings
+    routes['工大発 工大線'] = incomings
 
     incomings = client.get_incomings(departure_busstop=661, arrival_busstop=391)
     for icon_number, incoming in zip(icon_numbers, incomings):
         incoming['icon_number'] = icon_number
             
-    routes['ろう学校線'] = incomings
+    routes['工大発 ろう学校線'] = incomings
+
+    incomings = client.get_incomings(departure_busstop=391, arrival_busstop=681)
+    for icon_number, incoming in zip(icon_numbers, incomings):
+        incoming['icon_number'] = icon_number
+            
+    routes['東通り発 工大線'] = incomings
+
+    incomings = client.get_incomings(departure_busstop=391, arrival_busstop=661)
+    for icon_number, incoming in zip(icon_numbers, incomings):
+        incoming['icon_number'] = icon_number
+            
+    routes['中島三丁目発 ろう学校線'] = incomings
+
 
     return render_template(
         'index.html',
