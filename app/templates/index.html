@@ -8,10 +8,10 @@
         <!-- <br> -->
         <!-- </br> -->
         <header style="background-color:#0E6655;">
-            <span>
-                 <img src="/static/images/header.png" widht="100px" height="100px" style="display:block;margin: auto;">
-                 <h1 style="text-align:center;color:#F0F3F4;">バス接近情報</h1>
-            </span>
+            <div>
+                <img src="/static/images/header.png" widht="100px" height="100px" style="display:block;margin: auto;">
+                <div style="text-align:center;color:#F0F3F4;">バス接近情報</div>
+            </div>
         </header>
         <h2>
         {% for route in routes %}
@@ -20,41 +20,47 @@
                 <img src={{ routes[route]['route_image'] }} widht="40px" height="40px">
                 {{ route }}
             </h2>
-                <h1>
+                <div>
                     {% for incoming in routes[route]['incomings'] %}
-                    <img src={{ incoming["icon_number"] }} align="left" widht="35px" height="35px">
-                    {% if incoming['str_type'] != "本日の運行は終了しました。" %}
-                        <div style="background-color:#E5E7E9;">{{ incoming['time'] }} {{ incoming['str_type'] }}</div>
-                    {% else %}
-                        <div style="background-color:#707B7C;">{{ incoming['time'] }} {{ incoming['str_type'] }}</div>
-                    {% endif %}
+                        {% if incoming['str_type'] != "本日の運行は終了しました。" %}
+                            <div style="background-color:#E5E7E9;">
+                               <img src={{ incoming["icon_number"] }} widht="35px" height="35px">
+                               <strong>{{ incoming['time'] }} {{ incoming['str_type'] }}</strong>
+                            </div>
+                        {% else %}
+                            <div style="background-color:#707B7C;">
+                                <img src={{ incoming["icon_number"] }} widht="35px" height="35px">
+                                <strong>{{ incoming['time'] }} {{ incoming['str_type'] }}</strong>
+                            </div>
+                        {% endif %}
 
-                    {% if incoming['delay'] != 0 %}
-                        <div style="background-color:#B03A2E;text-indent:3rem;">
-                            <img src="/static/images/warning.png" widht="30px" height="30px"">
-                            {{ incoming['destination'] }}
-                        </div>
-                    {% elif incoming['destination'] == "まもなくバスがまいります" %}
-                        <div style="background-color:#D4AC0D;text-indent:3rem;">
-                            <img src="/static/images/notification.png" widht="30px" height="30px">
-                            {{ incoming['destination'] }}
-                        </div>
+                        {% if incoming['delay'] != 0 %}
+                            <div style="background-color:#B03A2E;text-indent:3rem;color:#FDFEFE;">
+                                <img src="/static/images/warning.png" widht="30px" height="30px"">
+                                {{ incoming['delay'] }} {{ incoming['destination'] }}
+                            </div>
+                        {% elif incoming['destination'] == "まもなくバスがまいります" %}
+                            <div style="background-color:#D4AC0D;text-indent:3rem;">
+                                <img src="/static/images/notification.png" widht="30px" height="30px">
+                                {{ incoming['destination'] }}
+                            </div>
 
-                    {% elif incoming['destination'] == "運行終了" %}
-                        <div style="background-color:#212F3D;text-indent:3rem;color:#C0392B;">
-                            <img src="/static/images/cancel.png" widht="30px" height="30px">
-                            {{ incoming['destination'] }}
-                        </div>
+                        {% elif incoming['destination'] == "運行終了" %}
+                            <div style="background-color:#212F3D;text-indent:3rem;color:#C0392B;">
+                                <img src="/static/images/cancel.png" widht="30px" height="30px">
+                                {{ incoming['destination'] }}
+                            </div>
 
-                    {% else %}
-                        <div style="background-color:#BDC3C7;text-indent:3rem;">
-                            <img src="/static/images/success.png" widht="30px" height="30px">
-                            {{ incoming['destination'] }}
-                        </div>
-                    {% endif %}            
-                </h1>
-                {% endfor %} 
+                        {% else %}
+                            <div style="background-color:#BDC3C7;text-indent:3rem;">
+                                <img src="/static/images/success.png" widht="30px" height="30px">
+                                {{ incoming['destination'] }}
+                            </div>
+                        {% endif %}
+                    {% endfor %}       
+                </div>
         </h2>
         {% endfor %}
+        <br></br>        
     </body>
 </html>
