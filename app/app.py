@@ -16,29 +16,29 @@ routes = {
         'route_image': '/static/images/college.png',
         'route_color': "background-color:#2874A6;color:#EAECEE;vertical-align:bottom;",
         'incomings': [],
-        'departure_busstop': 681, 
-        'arrival_busstop': 391
+        'departure_busstop': 391,
+        'arrival_busstop': 681
     },
     '工大発 ろう学校線': {
         'route_image': '/static/images/bus.png',
         'route_color': "background-color:#4A235A;color:#EAECEE;vertical-align:bottom;",
         'incomings': [],
-        'departure_busstop': 661, 
-        'arrival_busstop': 391
+        'departure_busstop': 391, 
+        'arrival_busstop': 661
     },
     '東通り発 工大線': {
         'route_image': '/static/images/college.png',
         'route_color': "background-color:#2874A6;color:#EAECEE;vertical-align:bottom;",
         'incomings': [],
-        'departure_busstop': 391, 
-        'arrival_busstop': 681
+        'departure_busstop': 681,
+        'arrival_busstop': 391
     },
     '中島三丁目発 ろう学校線': {
         'route_image': '/static/images/bus.png',
         'route_color': "background-color:#4A235A;color:#EAECEE;vertical-align:bottom;",
         'incomings': [],
-        'departure_busstop': 391, 
-        'arrival_busstop': 661
+        'departure_busstop': 661, 
+        'arrival_busstop': 391
     }
 }
 
